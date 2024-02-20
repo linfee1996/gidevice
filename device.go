@@ -996,6 +996,8 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 	lookupResult = lookupResult[bundleID].(map[string]interface{})
 	appContainer := lookupResult["Container"].(string)
 	appPath := lookupResult["Path"].(string)
+	nameExec := lookupResult["CFBundleExecutable"].(string)
+	name := nameExec[:len(nameExec)-len("-Runner")]
 
 	var pathXCTestCfg string
 	if pathXCTestCfg, err = d._uploadXCTestConfiguration(bundleID, sessionId, lookupResult); err != nil {
@@ -1022,8 +1024,8 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 		"MTC_CRASH_ON_REPORT":                "1",
 		"SQLITE_ENABLE_THREAD_ASSERTIONS":    "1",
 		"WDA_PRODUCT_BUNDLE_IDENTIFIER":      "",
-		"XCTestConfigurationFilePath":        pathXCTestConfiguration, // Running tests with active test configuration:
-		// "XCTestBundlePath":        fmt.Sprintf("%s/PlugIns/%s.xctest", appPath, name), // !!! ERROR
+		"XCTestConfigurationFilePath":        pathXCTestConfiguration,                            // Running tests with active test configuration:
+		"XCTestBundlePath":                   fmt.Sprintf("%s/PlugIns/%s.xctest", appPath, name), // !!! ERROR
 		// "XCTestSessionIdentifier": sessionId.String(), // !!! ERROR
 		// "XCTestSessionIdentifier":  "",
 		"XCODE_DBG_XPC_EXCLUSIONS": "com.apple.dt.xctestSymbolicator",
