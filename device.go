@@ -954,6 +954,18 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 		return _out, cancelFunc, err
 	}
 
+	xcTestManager2.registerCallback("_XCT_logDebugMessage:", func(m libimobiledevice.DTXMessageResult) {
+		// more information ( each operation )
+		// fmt.Println("###### xcTestManager2 ### -->", m)
+		if strings.Contains(fmt.Sprintf("%s", m), "Received test runner ready reply with error: (null)") {
+			// fmt.Println("###### xcTestManager2 ### -->", fmt.Sprintf("%v", m.Aux[0]))
+			time.Sleep(time.Second)
+			if err = xcTestManager2.startExecutingTestPlan(xcodeVersion); err != nil {
+				debugLog(fmt.Sprintf("startExecutingTestPlan %d: %s", xcodeVersion, err))
+				return
+			}
+		}
+	})
 	xcTestManager2.registerCallback("_Golang-iDevice_Unregistered", func(m libimobiledevice.DTXMessageResult) {
 		// more information
 		//  _XCT_testRunnerReadyWithCapabilities:
@@ -1048,6 +1060,18 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 		}
 	}
 
+	d.instruments.registerCallback("outputReceived:fromProcess:atTime:", func(m libimobiledevice.DTXMessageResult) {
+		// fmt.Println("###### instruments ### -->", m.Aux[0])
+		_out <- fmt.Sprintf("%s", m.Aux[0])
+	})
+
+	fmt.Println(11111111)
+	fmt.Println(appPath)
+	fmt.Println(bundleID)
+	fmt.Println(appEnv)
+	fmt.Println(appArgs)
+	fmt.Println(appOpt)
+
 	var pid int
 	if pid, err = d.instruments.AppLaunch(bundleID,
 		WithAppPath(appPath),
@@ -1062,6 +1086,7 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 	if err = d.instruments.startObserving(pid); err != nil {
 		return _out, cancelFunc, err
 	}
+
 	if DeviceVersion(version...) >= DeviceVersion(12, 0, 0) {
 		err = xcTestManager1.authorizeTestSession(pid)
 	} else if DeviceVersion(version...) <= DeviceVersion(9, 0, 0) {
@@ -1073,24 +1098,6 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 		return _out, cancelFunc, err
 	}
 
-	xcTestManager2.registerCallback("_XCT_logDebugMessage:", func(m libimobiledevice.DTXMessageResult) {
-		// more information ( each operation )
-		// fmt.Println("###### xcTestManager2 ### -->", m)
-		if strings.Contains(fmt.Sprintf("%s", m), "Received test runner ready reply with error: (null)") {
-			// fmt.Println("###### xcTestManager2 ### -->", fmt.Sprintf("%v", m.Aux[0]))
-			time.Sleep(time.Second)
-			if err = xcTestManager2.startExecutingTestPlan(xcodeVersion); err != nil {
-				debugLog(fmt.Sprintf("startExecutingTestPlan %d: %s", xcodeVersion, err))
-				return
-			}
-		}
-	})
-
-	d.instruments.registerCallback("outputReceived:fromProcess:atTime:", func(m libimobiledevice.DTXMessageResult) {
-		// fmt.Println("###### instruments ### -->", m.Aux[0])
-		_out <- fmt.Sprintf("%s", m.Aux[0])
-	})
-	
 	go func() {
 		d.instruments.registerCallback("_Golang-iDevice_Over", func(_ libimobiledevice.DTXMessageResult) {
 			cancelFunc()
