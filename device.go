@@ -1019,6 +1019,7 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 		"DYLD_FRAMEWORK_PATH":                appPath + "/Frameworks:",
 		"DYLD_LIBRARY_PATH":                  appPath + "/Frameworks",
 		"NSUnbufferedIO":                     "YES",
+		"MTC_CRASH_ON_REPORT":                "1",
 		"SQLITE_ENABLE_THREAD_ASSERTIONS":    "1",
 		"WDA_PRODUCT_BUNDLE_IDENTIFIER":      "",
 		"XCTestConfigurationFilePath":        pathXCTestConfiguration, // Running tests with active test configuration:
