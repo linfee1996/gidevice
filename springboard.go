@@ -3,7 +3,7 @@ package giDevice
 import (
 	"bytes"
 	"fmt"
-	"github.com/SonicCloudOrg/sonic-gidevice/pkg/libimobiledevice"
+	"github.com/linfee1996/gidevice/pkg/libimobiledevice"
 )
 
 func newSpringBoard(client *libimobiledevice.SpringBoardClient) *springboard {

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/SonicCloudOrg/sonic-gidevice/pkg/libimobiledevice"
+	"github.com/linfee1996/gidevice/pkg/libimobiledevice"
 )
 
 // instruments services

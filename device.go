@@ -31,9 +31,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/SonicCloudOrg/sonic-gidevice/pkg/ipa"
-	"github.com/SonicCloudOrg/sonic-gidevice/pkg/libimobiledevice"
-	"github.com/SonicCloudOrg/sonic-gidevice/pkg/nskeyedarchiver"
+	"github.com/linfee1996/gidevice/pkg/ipa"
+	"github.com/linfee1996/gidevice/pkg/libimobiledevice"
+	"github.com/linfee1996/gidevice/pkg/nskeyedarchiver"
 	uuid "github.com/satori/go.uuid"
 	"howett.net/plist"
 )

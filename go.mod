@@ -1,4 +1,4 @@
-module github.com/SonicCloudOrg/sonic-gidevice
+module github.com/linfee1996/gidevice
 
 go 1.16
 

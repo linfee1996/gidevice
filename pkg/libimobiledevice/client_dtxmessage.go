@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/hex"
 	"fmt"
-	"github.com/SonicCloudOrg/sonic-gidevice/pkg/nskeyedarchiver"
+	"github.com/linfee1996/gidevice/pkg/nskeyedarchiver"
 	"io"
 	"strings"
 	"sync"

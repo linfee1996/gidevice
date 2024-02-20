@@ -5,7 +5,7 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
-	"github.com/SonicCloudOrg/sonic-gidevice/pkg/libimobiledevice"
+	"github.com/linfee1996/gidevice/pkg/libimobiledevice"
 	"io"
 	"path"
 	"strconv"

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/SonicCloudOrg/sonic-gidevice/pkg/libimobiledevice"
+	"github.com/linfee1996/gidevice/pkg/libimobiledevice"
 )
 
 var _ Screenshot = (*screenshot)(nil)
