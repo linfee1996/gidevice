@@ -921,7 +921,7 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 	ctx, cancelFunc := context.WithCancel(context.TODO())
 	_out := make(chan string)
 
-	xcodeVersion := uint64(30)
+	xcodeVersion := uint64(29)
 
 	var tmSrv1 Testmanagerd
 	if tmSrv1, err = d.testmanagerdService(); err != nil {
@@ -1076,9 +1076,9 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 		return _out, cancelFunc, err
 	}
 
-	// if err = d.instruments.startObserving(pid); err != nil {
-	// 	return _out, cancelFunc, err
-	// }
+	if err = d.instruments.startObserving(pid); err != nil {
+		return _out, cancelFunc, err
+	}
 
 	if DeviceVersion(version...) >= DeviceVersion(12, 0, 0) {
 		err = xcTestManager1.authorizeTestSession(pid)
