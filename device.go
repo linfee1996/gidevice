@@ -1042,10 +1042,10 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 		"-ApplePersistenceIgnoreState", "YES",
 	}
 	appOpt := map[string]interface{}{
-		"StartSuspendedKey": uint64(0),
+		"StartSuspendedKey": false,
 	}
 	if DeviceVersion(version...) >= DeviceVersion(12, 0, 0) {
-		appOpt["ActivateSuspended"] = uint64(1)
+		appOpt["ActivateSuspended"] = true
 	}
 
 	if len(xcTestOpt.appEnv) != 0 {
