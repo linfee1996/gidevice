@@ -34,7 +34,7 @@ func NewXCTestConfiguration(nsuuid *NSUUID, nsurl *NSURL, targetBundleID, target
 		"reportResultsToIDE": true,
 		//"systemAttachmentLifetime":          2,
 		"targetApplicationArguments":   []interface{}{}, // maybe useless
-		"targetApplicationEnvironment": nil,
+		"targetApplicationEnvironment": map[string]interface{}{},
 		//"targetApplicationPath":             targetAppPath,
 		//"testApplicationDependencies":       map[string]interface{}{},
 		//"testApplicationUserOverrides":      nil,
