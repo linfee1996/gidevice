@@ -1050,7 +1050,9 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 
 	if len(xcTestOpt.appEnv) != 0 {
 		for k, v := range xcTestOpt.appEnv {
-			appEnv[k] = v
+			if k != "USE_PORT" {
+				appEnv[k] = v
+			}
 		}
 	}
 
