@@ -978,6 +978,18 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 		// fmt.Println("###### xcTestManager2 ### _Unregistered -->", m)
 	})
 
+	xcTestManager2.registerCallback("_XCT_testRunnerReadyWithCapabilities:", func(m libimobiledevice.DTXMessageResult) {
+		// more information
+		//  _XCT_testRunnerReadyWithCapabilities:
+		//  _XCT_didBeginExecutingTestPlan
+		//  _XCT_didBeginInitializingForUITesting
+		//  _XCT_testSuite:didStartAt:
+		//  _XCT_testCase:method:willStartActivity:
+		//  _XCT_testCase:method:didFinishActivity:
+		//  _XCT_testCaseDidStartForTestClass:method:
+		// fmt.Println("###### xcTestManager2 ### _Unregistered -->", m)
+	})
+
 	sessionId := uuid.NewV4()
 	if err = xcTestManager2.initiateSession(xcodeVersion, nskeyedarchiver.NewNSUUID(sessionId.Bytes())); err != nil {
 		return _out, cancelFunc, err
