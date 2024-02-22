@@ -1079,12 +1079,12 @@ func (d *device) XCTest(bundleID string, opts ...XCTestOption) (out <-chan strin
 		_out <- fmt.Sprintf("%s", m.Aux[0])
 	})
 
-	fmt.Println(11111111)
-	fmt.Println(appPath)
-	fmt.Println(bundleID)
-	fmt.Println(appEnv)
-	fmt.Println(appArgs)
-	fmt.Println(appOpt)
+	//fmt.Println(11111111)
+	//fmt.Println(appPath)
+	//fmt.Println(bundleID)
+	//fmt.Println(appEnv)
+	//fmt.Println(appArgs)
+	//fmt.Println(appOpt)
 
 	var pid int
 	if pid, err = d.instruments.AppLaunch(bundleID,
@@ -1174,7 +1174,8 @@ func (d *device) _uploadXCTestConfiguration(bundleID string, sessionId uuid.UUID
 	); err != nil {
 		return "", err
 	}
-
+	fmt.Println(11111111)
+	fmt.Println(content)
 	if err = appAfc.WriteFile(pathXCTestCfg, content, AfcFileModeWr); err != nil {
 		return "", err
 	}

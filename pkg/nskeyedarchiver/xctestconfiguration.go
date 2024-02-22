@@ -1,6 +1,7 @@
 package nskeyedarchiver
 
 import (
+	"fmt"
 	"howett.net/plist"
 	"reflect"
 )
@@ -51,6 +52,8 @@ func NewXCTestConfiguration(nsuuid *NSUUID, nsurl *NSURL, targetBundleID, target
 		"sessionIdentifier":                 nsuuid,
 		"targetApplicationBundleID":         targetBundleID,
 	}
+	fmt.Println(22222222)
+	fmt.Println(contents)
 	return &XCTestConfiguration{internal: contents}
 }
 
