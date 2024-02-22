@@ -50,7 +50,7 @@ func NewXCTestConfiguration(nsuuid *NSUUID, nsurl *NSURL, targetBundleID, target
 		"userAttachmentLifetime":            1,
 		"testBundleURL":                     nsurl,
 		"sessionIdentifier":                 nsuuid,
-		"targetApplicationBundleID":         targetBundleID,
+		"targetApplicationBundleID":         nil,
 	}
 	fmt.Println(22222222)
 	fmt.Println(contents)
